@@ -1,0 +1,106 @@
+[
+  {
+    "title": "マリオカート8 デラックス",
+    "id": "mario-kart-8",
+    "releaseDate": "発売日: 2017年4月",
+    "overview": ["あらゆる場所がサーキット。レース、バトル、すべてがデラックス。今までにないキャラクター、コース、マシンが加わり、『マリオカート8』がデラックスに", "Wii U『マリオカート8』の追加コンテンツを全て収録し、本作独自の新しいキャラクターやコース、マシンなどの新要素がプラスされ、シリーズ最大ボリュームのマリオカートとして新たに登場。", "バトルモードも充実。コースはバトル専用のものに一新。新しいルールも追加され、これまで以上に白熱した対戦が楽しめる。 新機能の「ハンドルアシスト」をオンにすれば、コースアウトせずに走れて初めての方やお子様でも安心して楽しめる。"],
+    "url": "https://www.nintendo.co.jp/switch/aabpa/index.html",
+    "youtubeId": "HljJvwifETg",
+    "img": {
+      "logo": "/mario-kart-8-logo.png",
+      "char": "/mario-kart-8-character.png",
+      "bg": "/mario-kart-8-bg.png"
+    }
+  },
+  {
+    "title": "あつまれ どうぶつの森",
+    "id": "atsumori",
+    "releaseDate": "発売日: 2020年3月",
+    "overview": ["無人島ではじまる、新生活。", "現実と同じ時間が流れる世界で、自由気ままな毎日を過ごす「どうぶつの森」シリーズ。", "釣りやムシとり、ガーデニングなどアウトドアな遊びから、お部屋づくり・ファッションまで様々な趣味を、1年を通してお楽しみいただけます。"],
+    "youtubeId": "glNlWvHunN0",
+    "url": "https://www.nintendo.co.jp/switch/acbaa/index.html",
+    "img": {
+      "logo": "/atsumori-logo.png",
+      "char": "/atsumori-character.png",
+      "bg": "/atsumori-bg.jpg"
+    }
+  },
+  {
+    "title": "大乱闘スマッシュブラザーズ SPECIAL",
+    "id": "super-smash-bros",
+    "releaseDate": "発売日: 2018年12月",
+    "overview": ["かつて登場したファイターたちが、まさかの全員参戦。初代ファイターから最新のファイターまで含めて総勢75体のファイターが戦いを繰り広げる。", "ステージの登場数は100以上。これまでのステージもパワーアップし、すべてが戦場化・終点化可能。", "ポケモン、アシストフィギュアもすべてがボリュームアップ。", "戦闘を盛り上げる曲は800曲以上。新規アレンジ曲も盛りだくさん。"],
+    "youtubeId": "MqhPRopjbGI",
+    "url": "https://www.smashbros.com/ja_JP/",
+    "img": {
+      "logo": "/super-smash-bros-logo.png",
+      "char": "/super-smash-bros-character.png",
+      "bg": "/super-smash-bros-bg.jpg"
+    }
+  },
+  {
+    "title": "ゼルダの伝説 ブレス オブ ザ ワイルド",
+    "releaseDate": "発売日: 2017年3月",
+    "overview": ["駆ける、活きる、護る。果てなき冒険を思いのままに。", "広大な世界を舞台に、どこに行くのも、何をするのも、冒険のすべてがあなた次第。", "野生動物を狩って過ごすのか? 魔物を退治しに行くのか? 絶景ポイントを見て回るのか?", "走る、泳ぐ、飛ぶ、登る、どこまでも広がる世界で思いのままに冒険を楽しめる。", "Nintendo Switchなら、自宅のテレビでじっくりプレイした続きを外出中に楽しむなど、プレイスタイルも自由自在。"],
+    "youtubeId": "1yIHLQJNvDw",
+    "url": "https://www.nintendo.co.jp/zelda/index.html",
+    "id": "zelda-breath-of-the-wild",
+    "img": {
+      "logo": "/zelda-breath-of-the-wild-logo.webp",
+      "char": "/zelda-breath-of-the-wild-character.png",
+      "bg": "/zelda-breath-of-the-wild-bg.jpg"
+    }
+  },
+  {
+    "title": "ポケットモンスター ソード・シールド",
+    "id": "pokemon-sword-and-shield",
+    "releaseDate": "発売日: 2019年11月",
+    "overview": ["新たな冒険の舞台となるのは、広大な「ガラル地方」！ おだやかな田園風景や、近代的な都市、雄大な草原や険しい雪山など、さまざまな表情を持つ地方だ。", "ガラル地方には、人とポケモンがいっしょに仕事をしている街など、数多くの個性的な場所がある。これまでに見たことのないポケモンたちもたくさん暮らしているぞ！"],
+    "youtubeId": "FzGoBHR21As",
+    "url": "https://www.pokemon.co.jp/ex/sword_shield/",
+    "img": {
+      "logo": "/pokemon-sword-shield-logo.png",
+      "char": "/pokemon-sword-shield-character.png",
+      "bg": "/pokemon-sword-shield-bg.jpg"
+    }
+  },
+  {
+    "title": "スーパーマリオ オデッセイ",
+    "id": "super-mario-odyssey",
+    "releaseDate": "発売日: 2017年10月",
+    "overview": ["マリオ、世界の旅へ。Nintendo Switch向けソフトに新作3Dマリオが登場します。", "大きな箱庭ステージを縦横無尽に走り回るマリオは『スーパーマリオサンシャイン』以来15年ぶり。", "幅跳びやボディアタックといった、3Dマリオ特有のアクションはそのままに、敵を倒したり、足場にしたりと、帽子を使った新たなアクションが加わりました。", "帽子の相棒キャッピーの能力で、マリオは敵やモノに憑依できる「キャプチャー」という能力を身に着けました。"],
+    "youtubeId": "QoVBtEo-egk",
+    "url": "https://www.nintendo.co.jp/switch/aaaca/index.html",
+    "img": {
+      "logo": "/super-mario-odyssey-logo.png",
+      "char": "/super-mario-odyssey-character.png",
+      "bg": "/super-mario-odyssey-bg.jpeg"
+    }
+  },
+  {
+    "title": "スーパーマリオパーティ",
+    "id": "super-mario-party",
+    "releaseDate": "発売日: 2018年10月",
+    "overview": ["いつでも、どこでも、スーパーなマリオパーティ。", "メインの「マリオパーティ」モードでは、キャラクター特有のサイコロなどが盛りだくさん。", "「トイパーティ」モードでは、2台のNintendo Switchをつなげて遊ぶなど、ユニークなプレイスタイルのゲームが楽しめる。", "対応する10種類のミニゲームから決まった5つのミニゲームを連続でプレイして競い合うオンライン専用モード「オンラインアスロン」も収録されている。"],
+    "youtubeId": "Njv2bTaBzIM",
+    "url": "https://www.nintendo.co.jp/switch/adfja/pc/index.html",
+    "img": {
+      "logo": "/super-mario-party-logo.png",
+      "char": "/super-mario-party-character.png",
+      "bg": "/super-mario-party-bg.png"
+    }
+  },
+  {
+    "title": "ポケットモンスター Let's Go! ピカチュウ・Let's Go! イーブイ",
+    "id": "pokemon-eevee-pikachu",
+    "releaseDate": "発売日: 2018年11月",
+    "overview": ["「相棒」となるイーブイは、主人公の肩や頭に乗っていっしょに行動し、表情豊かな愛らしさと、バトルでの頼もしさを兼ね備えた、キミのパートナーに。", "ポケモンを捕まえる楽しさが一新し、「Joy-Con」を振ることでモンスターボールを投げて、ポケモンをゲットすることができるように。シリーズ初の2人同時プレイに対応し、「Joy-Con」をおすそわけすることで、同じ世界を二人で冒険することができます。", "また本作では、モンスターボールの形をしたデバイス「モンスターボール Plus」 (別売) に対応し、「Joy-Con」の代わりに、コントローラーとして遊ぶことができます。", "スマートフォンアプリ『Pokémon GO』とも連動し、『Pokémon GO』で捕まえたカントー地方に登場するポケモンたちを本作に連れて行くこともできます。"],
+    "youtubeId":"n6bK0JjqNK4",
+    "url": "https://www.pokemon.co.jp/ex/pika_vee/",
+    "img": {
+      "logo": "/pokemon-eevee-pikachu-logo.png",
+      "char": "/pokemon-eevee-pikachu-character.png",
+      "bg": "/pokemon-eevee-pikachu-bg.png"
+    }
+  }
+]
