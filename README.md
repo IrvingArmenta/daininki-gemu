@@ -1,58 +1,36 @@
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/26466516/107675802-36216b80-6c77-11eb-8db1-4d3407dc53d9.png" alt="Next.js and TypeScript">
-</p>
 
-<p align="center">
-  <img src="https://img.shields.io/static/v1?label=PRs&message=welcome&style=for-the-badge&color=24B36B&labelColor=000000" alt="PRs welcome!" />
+# Nintendo Switch - 大人気ゲーム 
+### Nintendo Switch 大人気ゲームのランディングページ 
 
-  <img alt="License" src="https://img.shields.io/github/license/jpedroschmitz/typescript-nextjs-starter?style=for-the-badge&color=24B36B&labelColor=000000">
+## フロントエンドスタック 
+- パッケージマネージャー:  
+  - yarn - https://classic.yarnpkg.com/lang/en/
+- フレームワーク: 
+  - Next JS - https://preactjs.com/
+  - React - https://ja.reactjs.org/
+  - Typescript - https://www.typescriptlang.org/ja/
+- スタイル:
+  - styled-components - https://styled-components.com/
+  - styled-normalize - https://github.com/sergeysova/styled-normalize
+- アニメーション
+  - Framer-Motion - https://www.framer.com/api/motion
+  - react-intersection-observer - https://github.com/thebuilder/react-intersection-observer
+- アプリケーションデータ管理:
+  - 静的JSONデータ
+  - getStaticProps & getStaticPath - https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation
+    - 静的に生成されたデータの実装
+    - より良いSEOのための実装
+## 🚀 CLI コマンド
+*   `yarn install`: デペンデンシーインストールします
 
-  <a href="https://twitter.com/intent/follow?screen_name=jpedroschmitz">
-    <img src="https://img.shields.io/twitter/follow/jpedroschmitz?style=for-the-badge&color=24B36B&labelColor=000000" alt="Follow @jpedroschmitz" />
-  </a>
-</p>
+*   `yarn dev`: ポート3000で開発サーバーを実行します
 
-<br>
+*   `yarn start`: 本番サーバーを実行する
 
-A TypeScript starter for Next.js that includes all you need to build amazing projects 🔥
+*   `yarn build`: NextJS アプリケーションをビルドする
 
-- 📏 **ESLint** — Pluggable JavaScript linter
-- 💖 **Prettier** - Opinionated Code Formatter
-- 🐶 **Husky** — Use git hooks with ease
-- 📄 **Commitizen** - Conventional commit messages CLI
-- 🚓 **Commitlint** - Lint commit messages
-- 🖌 **Renovate** - Dependency update tool
-- 🚫 **lint-staged** - Run linters against staged git files
-- 🗂 **Absolute import** - Import folders and files using the `@` prefix
+*   `yarn lint`: eslintを使用してすべてのtypescriptファイルをリントします
+*   `yarn type-check`: typescript関連のタイプを確認してください
 
-## 🚀 Getting started
 
-The best way to start with this template is using `create-next-app`.
 
-```
-npx create-next-app ts-next -e https://github.com/jpedroschmitz/typescript-nextjs-starter
-```
-
-If you prefer you can clone this repository and run the following commands inside the project folder:
-
-1. `npm install` or `yarn`;
-2. `yarn dev`;
-
-To view the project open `http://localhost:3000`.
-
-## 🤝 Contributing
-
-1. Fork this repository;
-2. Create your branch: `git checkout -b my-new-feature`;
-3. Commit your changes: `git commit -m 'Add some feature'`;
-4. Push to the branch: `git push origin my-new-feature`.
-
-**After your pull request is merged**, you can safely delete your branch.
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for more information.
-
----
-
-Made with ♥ by João Pedro Schmitz

@@ -10,6 +10,7 @@ function Home() {
     <>
       <Head>
         <title>Nintendo Switch - 大人気ゲーム！</title>
+        <meta name="description" content="Nintendo Switch 大人気ゲームの一蘭" />
       </Head>
       <GamesList gamesList={gameData} />
     </>
