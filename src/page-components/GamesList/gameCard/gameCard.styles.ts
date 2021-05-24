@@ -17,9 +17,6 @@ export const GameCardWrap = styled(motion.div)`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  &:hover {
-    background-color: ${(p) => p.theme.colors.primary.base};
-  }
   ${mediaUp(550)} {
     flex-direction: row;
   }
@@ -81,6 +78,8 @@ export const GameCardWrap = styled(motion.div)`
     position: relative;
     max-width: 100%;
     max-height: 100%;
+    pointer-events: none;
+    user-select: none;
   }
   .bg {
     bottom: 0;
@@ -90,9 +89,10 @@ export const GameCardWrap = styled(motion.div)`
     opacity: 0.2;
     object-fit: cover;
     object-position: center;
+    pointer-events: none;
   }
 
-  // specific fixes
+  // 特定のロゴ
   &.pokemon-sword-and-shield-card {
     .logo-wrap {
       max-width: 32vw;

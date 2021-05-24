@@ -30,6 +30,7 @@ const GamesListWrap = styled.section`
       min-width: 350px;
       border-radius: 16px;
       overflow: hidden;
+      box-shadow: 0 4px 2px #333;
       &:not(:first-child) {
         margin-left: ${gridSpacing}px;
       }
@@ -43,6 +44,20 @@ const GamesListWrap = styled.section`
         height: auto;
         width: calc(25% - ${gridSpacing * 2}px);
         font-size: 14px;
+      }
+      &:nth-child(odd) {
+        > div {
+          &:hover {
+            background-color: ${(p) => p.theme.colors.primary.base};
+          }
+        }
+      }
+      &:nth-child(even) {
+        > div {
+          &:hover {
+            background-color: ${(p) => p.theme.colors.secondary.base};
+          }
+        }
       }
     }
   }

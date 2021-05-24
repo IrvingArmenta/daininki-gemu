@@ -10,9 +10,9 @@ export const theme: DefaultTheme = {
       dark: '#c3000f'
     },
     secondary: {
-      base: '#364564',
-      dark: '#212C44',
-      light: '#485878'
+      base: '#00c3e3',
+      dark: '#008196',
+      light: '#30e2ff'
     },
     grayscale: {
       ...grayscale

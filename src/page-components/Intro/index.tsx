@@ -1,7 +1,12 @@
 import React, { useCallback, useEffect, useRef, FC } from 'react';
 import IntroWrapper from './intro.styles';
 import SwitchLogo from '@/components/SwitchLogo';
-import { AnimatePresence, motion, useAnimation } from 'framer-motion';
+import {
+  AnimatePresence,
+  AnimateSharedLayout,
+  motion,
+  useAnimation
+} from 'framer-motion';
 import { sleep } from '@/utils';
 import useSessionStorage from '@/hooks/useSessionStorage';
 import { ReactComponent as Logo } from '../../../public/icons/switch-logo.svg';
@@ -78,6 +83,7 @@ const Intro: FC = () => {
       textControl.start({ marginRight: '24px', marginTop: 0 });
       sloganControl.start({ fontSize: '0.3em', marginTop: 0 });
       document.documentElement.removeAttribute('style');
+      // これにより、アニメーションがセッションごとに1回だけ発生するようになります
       setAnimationRan('true');
     } else if (logoRef.current) {
       logoRef.current.classList.add('no-animation');
@@ -115,59 +121,62 @@ const Intro: FC = () => {
   }, []);
 
   return (
-    <IntroWrapper
-      animate={wrapperControl}
-      ref={wrapperRef}
-      style={{ width: '100%' }}
-    >
-      <AnimatePresence>
-        {router.pathname !== '/' && (
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="top-link-wrap"
-            title="トップページへ"
-          >
-            <Link href="/">{`< トップページ`}</Link>
-          </motion.span>
-        )}
-      </AnimatePresence>
-      <SwitchLogo
-        layout={true}
-        initial={{ opacity: 0, scale: 0.4 }}
-        animate={logoControl}
-        ref={logoRef}
-        layoutId="SwitchLogo"
-      />
-      <motion.span
-        initial={{ opacity: 0 }}
-        animate={textControl}
-        className="logo-text element"
+    <AnimateSharedLayout>
+      <IntroWrapper
+        animate={wrapperControl}
+        ref={wrapperRef}
+        style={{ width: '100%' }}
         layout={true}
       >
-        <Logo title="Nintendo Switch" />
-      </motion.span>
-      <motion.span
-        initial={{ opacity: 0, fontSize: 0 }}
-        className="slogan element"
-        layout={true}
-        animate={sloganControl}
-      >
-        <ruby>
-          大<rt>だい</rt>
-          人気<rt>にんき</rt>
-          ゲーム !!
-        </ruby>
-      </motion.span>
-      <motion.span
-        animate={circleControl}
-        initial={{ scale: 0 }}
-        style={{ translateX: '-50%', translateY: '-50%' }}
-        ref={circleRef}
-        className="circle element"
-      />
-    </IntroWrapper>
+        <AnimatePresence>
+          {router.pathname !== '/' && (
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="top-link-wrap"
+              title="トップページへ"
+            >
+              <Link href="/">{`< トップページ`}</Link>
+            </motion.span>
+          )}
+        </AnimatePresence>
+        <SwitchLogo
+          layout={true}
+          initial={{ opacity: 0, scale: 0.4 }}
+          animate={logoControl}
+          ref={logoRef}
+          layoutId="SwitchLogo"
+        />
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={textControl}
+          className="logo-text element"
+          layout={true}
+        >
+          <Logo title="Nintendo Switch" />
+        </motion.span>
+        <motion.span
+          initial={{ opacity: 0, fontSize: 0 }}
+          className="slogan element"
+          layout={true}
+          animate={sloganControl}
+        >
+          <ruby>
+            大<rt>だい</rt>
+            人気<rt>にんき</rt>
+            ゲーム !!
+          </ruby>
+        </motion.span>
+        <motion.span
+          animate={circleControl}
+          initial={{ scale: 0 }}
+          style={{ translateX: '-50%', translateY: '-50%' }}
+          ref={circleRef}
+          className="circle element"
+        />
+      </IntroWrapper>
+    </AnimateSharedLayout>
   );
 };
 

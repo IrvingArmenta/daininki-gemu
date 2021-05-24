@@ -2,7 +2,12 @@ import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import gamesData from 'api/switch-games.json';
 import { GameType } from '@/api/data-typings';
-import { AnimatePresence, motion, Variants } from 'framer-motion';
+import {
+  AnimatePresence,
+  AnimateSharedLayout,
+  motion,
+  Variants
+} from 'framer-motion';
 import styled from 'styled-components';
 import SwitchVideo from '@/components/SwitchVideo';
 import { PageHeight } from '@/page-components/shared';
@@ -15,17 +20,10 @@ import { deployUrl } from '@/utils';
 
 const gameInfoVariants: Variants = {
   hidden: {
-    opacity: 0,
-    transition: {
-      when: 'beforeChildren',
-      staggerChildren: 0.3
-    }
+    opacity: 0
   },
   reveal: {
-    opacity: 1,
-    transition: {
-      when: 'beforeChildren'
-    }
+    opacity: 1
   },
   scaleOut: {
     scale: 0,
@@ -37,12 +35,6 @@ const gameInfoVariants: Variants = {
     transition: {
       delay: 0.2
     }
-  },
-  hiddenChild: {
-    opacity: 0
-  },
-  revealChild: {
-    opacity: 1
   },
   hiddenLeft: {
     translateX: '-80%',
@@ -260,125 +252,130 @@ function GameInfoPage(props: GameInfoType) {
   const { title, id, img, youtubeId, releaseDate, overview, url } = gameData;
 
   return (
-    <AnimatePresence exitBeforeEnter={true}>
-      <GameInfoWrapper
-        key={id}
-        variants={gameInfoVariants}
-        $bgImage={`url(${img.bg})`}
-        initial="hidden"
-        animate="reveal"
-        exit="hidden"
-        layout={true}
-      >
-        <Head>
-          <title>{`Nintendo Switch - ${title}ページ`}</title>
-          <meta
-            name="description"
-            content={`Nintendo Switch大人気ゲーム - ${title}`}
-          />
-          <link rel="canonical" href={`${deployUrl}${id}`} />
-        </Head>
-        <motion.h1
+    <AnimateSharedLayout>
+      <AnimatePresence exitBeforeEnter={true}>
+        <GameInfoWrapper
+          key={id}
           variants={gameInfoVariants}
-          initial="scaleOut"
-          animate="scaleIn"
-          exit="scaleOut"
+          $bgImage={`url(${img.bg})`}
+          initial="hidden"
+          animate="reveal"
+          exit="hidden"
         >
-          <img src={img.logo} className={`logo ${id}`} alt={`${title} ロゴ`} />
-          <span className="sr-only">{title}</span>
-        </motion.h1>
-        <div className="middle-row">
-          <motion.div className="content" layout={true}>
-            <motion.div
-              className="middle-row-top"
-              initial="hiddenLeft"
-              animate="slideIn"
-              exit="hiddenLeft"
-              variants={gameInfoVariants}
-            >
-              <h3>{releaseDate}</h3>
-              <LinkButton
-                className="official-link"
-                target="__blank"
-                href={url}
-                rel="noopener noreferrer"
-                $fontSize="14px"
-                whileTap={{ scale: 0.96 }}
-              >
-                <span>オフィシャルサイトへ</span> <OpenNew />
-              </LinkButton>
-            </motion.div>
-            <motion.ul
-              className="overview-list"
-              initial="hiddenLeft"
-              animate="slideIn"
-              exit="hiddenLeft"
-              variants={gameInfoVariants}
-            >
-              {overview.map((line, i) => (
-                <li key={i}>{line}</li>
-              ))}
-            </motion.ul>
-          </motion.div>
-          <motion.img
-            src={img.char}
-            className="char"
+          <Head>
+            <title>{`Nintendo Switch - ${title}ページ`}</title>
+            <meta
+              name="description"
+              content={`Nintendo Switch大人気ゲーム - ${title}`}
+            />
+            <link rel="canonical" href={`${deployUrl}${id}`} />
+          </Head>
+          <motion.h1
             variants={gameInfoVariants}
-            alt={`${title} キャラクター`}
-            initial="hiddenRight"
-            animate="slideIn"
-            exit="hiddenRight"
-          />
-        </div>
-        <motion.div
-          className="switch-video-wrap"
-          initial="scaleOut"
-          animate="scaleIn"
-          exit="scaleOut"
-          variants={gameInfoVariants}
-        >
-          <SwitchVideo title={`${title} どうが`} videoId={youtubeId} />
-        </motion.div>
-        <nav className="nav-wrap">
-          <Link passHref={true} href={`/games/${prevGame.id}`}>
-            <LinkButton
-              initial="hiddenLeft"
-              animate="slideIn"
-              exit="hiddenLeft"
+            initial="scaleOut"
+            animate="scaleIn"
+            exit="scaleOut"
+          >
+            <img
+              src={img.logo}
+              className={`logo ${id}`}
+              alt={`${title} ロゴ`}
+            />
+            <span className="sr-only">{title}</span>
+          </motion.h1>
+          <div className="middle-row">
+            <motion.div className="content" layout={true}>
+              <motion.div
+                className="middle-row-top"
+                initial="hiddenLeft"
+                animate="slideIn"
+                exit="hiddenLeft"
+                variants={gameInfoVariants}
+              >
+                <h3>{releaseDate}</h3>
+                <LinkButton
+                  className="official-link"
+                  target="__blank"
+                  href={url}
+                  rel="noopener noreferrer"
+                  $fontSize="14px"
+                  whileTap={{ scale: 0.96 }}
+                >
+                  <span>オフィシャルサイトへ</span> <OpenNew />
+                </LinkButton>
+              </motion.div>
+              <motion.ul
+                className="overview-list"
+                initial="hiddenLeft"
+                animate="slideIn"
+                exit="hiddenLeft"
+                variants={gameInfoVariants}
+              >
+                {overview.map((line, i) => (
+                  <li key={i}>{line}</li>
+                ))}
+              </motion.ul>
+            </motion.div>
+            <motion.img
+              src={img.char}
+              className="char"
               variants={gameInfoVariants}
-              whileTap={{ scale: 0.95 }}
-              className="nav-button prev"
-            >
-              <img src={prevGame.img.logo} alt={`${prevGame.title} ロゴ`} />
-            </LinkButton>
-          </Link>
-          <Link passHref={true} href="/">
-            <LinkButton
-              initial="hiddenChild"
-              animate="revealChild"
-              exit="hiddenChild"
-              variants={gameInfoVariants}
-              className="top-page-button"
-              whileTap={{ scale: 0.95 }}
-            >
-              トップページへ
-            </LinkButton>
-          </Link>
-          <Link passHref={true} href={`/games/${nextGame.id}`}>
-            <LinkButton
+              alt={`${title} キャラクター`}
               initial="hiddenRight"
               animate="slideIn"
               exit="hiddenRight"
-              variants={gameInfoVariants}
-              className="nav-button next"
-              whileTap={{ scale: 0.95 }}
-            >
-              <img src={nextGame.img.logo} alt={`${nextGame.title} ロゴ`} />
-            </LinkButton>
-          </Link>
-        </nav>
-      </GameInfoWrapper>
-    </AnimatePresence>
+            />
+          </div>
+          <motion.div
+            className="switch-video-wrap"
+            initial="scaleOut"
+            animate="scaleIn"
+            exit="scaleOut"
+            variants={gameInfoVariants}
+          >
+            <SwitchVideo title={`${title} どうが`} videoId={youtubeId} />
+          </motion.div>
+          <nav className="nav-wrap">
+            <Link passHref={true} href={`/games/${prevGame.id}`}>
+              <LinkButton
+                initial="hiddenLeft"
+                animate="slideIn"
+                exit="hiddenLeft"
+                variants={gameInfoVariants}
+                whileTap={{ scale: 0.95 }}
+                className="nav-button prev"
+              >
+                <img src={prevGame.img.logo} alt={`${prevGame.title} ロゴ`} />
+              </LinkButton>
+            </Link>
+            <Link passHref={true} href="/">
+              <LinkButton
+                initial="hidden"
+                animate="reveal"
+                exit="hidden"
+                variants={gameInfoVariants}
+                className="top-page-button"
+                whileTap={{ scale: 0.95 }}
+              >
+                トップページへ
+              </LinkButton>
+            </Link>
+            <Link passHref={true} href={`/games/${nextGame.id}`}>
+              <LinkButton
+                initial="hiddenRight"
+                animate="slideIn"
+                exit="hiddenRight"
+                variants={gameInfoVariants}
+                className="nav-button next"
+                whileTap={{ scale: 0.95 }}
+              >
+                <img src={nextGame.img.logo} alt={`${nextGame.title} ロゴ`} />
+              </LinkButton>
+            </Link>
+          </nav>
+        </GameInfoWrapper>
+      </AnimatePresence>
+    </AnimateSharedLayout>
   );
 }
 

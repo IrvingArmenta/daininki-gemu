@@ -17,19 +17,20 @@ const GameCard: FC<GameCardType> = (props) => {
   const { title, img, id, ...rest } = props;
   const { isMobile } = useMobileDetect();
   const { inView, ref } = useInView({
-    threshold: 0.8,
+    threshold: 0.9,
     triggerOnce: true
   });
   const [cardD, setCardD] = useState<{ width: number; height: number }>({
     height: 0,
     width: 0
   });
+  const cardRef = useRef<HTMLDivElement>(null);
 
+  // framer-motion
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const logoControl = useAnimation();
   const bgImageControl = useAnimation();
-  const cardRef = useRef<HTMLDivElement>(null);
   const moveX = useTransform(y, [0, cardD.width], [0, 32]);
   const moveY = useTransform(x, [0, cardD.height], [0, 58]);
   const moveX2 = useTransform(moveX, (move) => move * 2);
@@ -73,7 +74,9 @@ const GameCard: FC<GameCardType> = (props) => {
           handleMouse(e);
         }
       }}
-      style={{ perspective: !isMobile() ? 1000 : 'initial' }}
+      style={{
+        perspective: !isMobile() ? 1000 : 'initial'
+      }}
       layout={true}
       whileTap={
         !isMobile()
@@ -118,6 +121,7 @@ const GameCard: FC<GameCardType> = (props) => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 74 }}
             className="button"
+            whileTap={{ scale: 0.96 }}
           >
             ゲームページへ
           </LinkButton>
