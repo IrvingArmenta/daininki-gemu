@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { mediaUp } from '@/styles/utils';
 import { ReactComponent as OpenNew } from '../../../public/icons/open-new-icon.svg';
 import Head from 'next/head';
+import { deployUrl } from '@/utils';
 
 const gameInfoVariants: Variants = {
   hidden: {
@@ -183,12 +184,10 @@ const GameInfoWrapper = styled(motion.section)<{ $bgImage: string }>`
     padding: 16px;
     background-color: #fff;
     border-radius: 8px;
-    margin: 0 0 24px;
     margin-left: 0;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.65);
     ${mediaUp(580)} {
       min-width: 320px;
-      margin: 0 16px 0 0;
     }
     li {
       &:not(:last-child) {
@@ -247,6 +246,11 @@ const GameInfoWrapper = styled(motion.section)<{ $bgImage: string }>`
     .content {
       text-align: left;
       max-width: 750px;
+      margin-bottom: 16px;
+      ${mediaUp(580)} {
+        margin-bottom: 0;
+        margin-right: 16px;
+      }
     }
   }
 `;
@@ -272,21 +276,19 @@ function GameInfoPage(props: GameInfoType) {
             name="description"
             content={`Nintendo Switch大人気ゲーム - ${title}`}
           />
+          <link rel="canonical" href={`${deployUrl}${id}`} />
         </Head>
-        <h1>
-          <motion.img
-            src={img.logo}
-            className={`logo ${id}`}
-            alt={`${title} ロゴ`}
-            variants={gameInfoVariants}
-            initial="hiddenLeft"
-            animate="slideIn"
-            exit="hiddenLeft"
-          />
+        <motion.h1
+          variants={gameInfoVariants}
+          initial="scaleOut"
+          animate="scaleIn"
+          exit="scaleOut"
+        >
+          <img src={img.logo} className={`logo ${id}`} alt={`${title} ロゴ`} />
           <span className="sr-only">{title}</span>
-        </h1>
+        </motion.h1>
         <div className="middle-row">
-          <div className="content">
+          <motion.div className="content" layout={true}>
             <motion.div
               className="middle-row-top"
               initial="hiddenLeft"
@@ -317,7 +319,7 @@ function GameInfoPage(props: GameInfoType) {
                 <li key={i}>{line}</li>
               ))}
             </motion.ul>
-          </div>
+          </motion.div>
           <motion.img
             src={img.char}
             className="char"
