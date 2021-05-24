@@ -65,7 +65,6 @@ const Intro: FC = () => {
           duration: 0.7
         }
       });
-      document.documentElement.removeAttribute('style');
       await wrapperControl.start({
         height: '100px',
         fontSize: '60px',
@@ -78,7 +77,8 @@ const Intro: FC = () => {
       logoControl.start({ marginRight: '8px' });
       textControl.start({ marginRight: '24px', marginTop: 0 });
       sloganControl.start({ fontSize: '0.3em', marginTop: 0 });
-      //setAnimationRan('true');
+      document.documentElement.removeAttribute('style');
+      setAnimationRan('true');
     } else if (logoRef.current) {
       logoRef.current.classList.add('no-animation');
       logoControl.set({

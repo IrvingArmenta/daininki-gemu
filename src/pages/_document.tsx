@@ -38,7 +38,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="ja">
+      <Html lang="ja" translate="no">
         <Head>
           <meta
             name="description"

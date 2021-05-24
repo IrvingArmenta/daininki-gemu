@@ -75,7 +75,11 @@ const GameCard: FC<GameCardType> = (props) => {
       }}
       style={{ perspective: !isMobile() ? 1000 : 'initial' }}
       layout={true}
-      whileTap={{ scale: 0.95, borderRadius: '16px' }}
+      whileTap={
+        !isMobile()
+          ? { scale: 0.95, borderRadius: '16px' }
+          : { scale: 1, borderRadius: '16px' }
+      }
       initial={false}
       onMouseEnter={() => {
         if (!isMobile()) {
@@ -95,8 +99,8 @@ const GameCard: FC<GameCardType> = (props) => {
         animate={logoControl}
         initial={false}
         style={{
-          rotateX,
-          rotateY
+          rotateX: isMobile() ? 0 : rotateX,
+          rotateY: isMobile() ? 0 : rotateY
         }}
       >
         <motion.img className="logo" alt={`${title} ロゴ`} src={img.logo} />
