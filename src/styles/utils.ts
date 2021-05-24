@@ -64,10 +64,8 @@ export const mediaUp = (
   breakpoint: keyof DefaultTheme['breakpoints'] | ReactText
 ) => {
   let bp = null;
-  if (
-    Object.prototype.hasOwnProperty.call(breakpoints, breakpoint) &&
-    typeof breakpoint !== 'number'
-  ) {
+
+  if (Object.prototype.hasOwnProperty.call(breakpoints, breakpoint)) {
     const bpas = breakpoint as keyof DefaultTheme['breakpoints'];
     bp = breakpoints[bpas];
   } else {

@@ -1,30 +1,23 @@
-import { useEffect } from 'react';
-import { off, on, useRafState, isBrowser } from './utils';
+import { useEffect, useState } from 'react';
 
-const useWindowSize = (initialWidth = Infinity, initialHeight = Infinity) => {
-  const [state, setState] = useRafState<{ width: number; height: number }>({
-    width: isBrowser ? window.innerWidth : initialWidth,
-    height: isBrowser ? window.innerHeight : initialHeight
+export default function useWindowSize() {
+  const isSSR = typeof window === 'undefined';
+  const [windowSize, setWindowSize] = useState({
+    width: isSSR ? 1200 : window.innerWidth,
+    height: isSSR ? 800 : window.innerHeight
   });
 
-  useEffect((): (() => void) | void => {
-    if (isBrowser) {
-      const handler = () => {
-        setState({
-          width: window.innerWidth,
-          height: window.innerHeight
-        });
-      };
+  function changeWindowSize() {
+    setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+  }
 
-      on(window, 'resize', handler);
+  useEffect(() => {
+    window.addEventListener('resize', changeWindowSize);
 
-      return () => {
-        off(window, 'resize', handler);
-      };
-    }
+    return () => {
+      window.removeEventListener('resize', changeWindowSize);
+    };
   }, []);
 
-  return state;
-};
-
-export default useWindowSize;
+  return windowSize;
+}

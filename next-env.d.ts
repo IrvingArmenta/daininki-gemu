@@ -1,6 +1,5 @@
 /// <reference types="next" />
 /// <reference types="next/types/global" />
-/// <reference types="next-images" />
 
 declare module '*.svg' {
   import React from 'react';
@@ -13,6 +12,8 @@ declare module '*.svg' {
   >;
   export default content;
 }
+
+declare module 'react-overflow-indicator';
 
 declare module '*.png' {
   const content: string;

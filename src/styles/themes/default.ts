@@ -6,8 +6,8 @@ export const theme: DefaultTheme = {
     appBgColor: '#fff',
     primary: {
       base: '#e60012',
-      light: '#2E6CFF',
-      dark: '#0743D0'
+      light: '#fe1123',
+      dark: '#c3000f'
     },
     secondary: {
       base: '#364564',

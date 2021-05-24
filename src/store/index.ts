@@ -3,15 +3,15 @@ import create from 'zustand';
 import { log } from './utils';
 
 export type GlobalStateType = {
-  gamesData: GameType[];
-  setGameData: (arr: GameType[]) => void;
+  scrollPreserve: number;
+  setScrollData: (scrollValue: number) => void;
 };
 
 export const useGlobalStore = create<GlobalStateType>(
   log(
     (set) => ({
-      gamesData: [],
-      setGameData: (arr) => set({ gamesData: arr })
+      scrollPreserve: 0,
+      setScrollData: (scrollVal) => set({ scrollPreserve: scrollVal })
     }),
     'Global store'
   )

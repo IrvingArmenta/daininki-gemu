@@ -16,6 +16,10 @@ export const GlobalStyles = createGlobalStyle`
       font-size: ${pxToRem(`14px`)};
   }
 
+  img {
+    max-width: 100%;
+  }
+
   blockquote {
     background: #f9f9f9;
     border-left: 10px solid #ccc;
