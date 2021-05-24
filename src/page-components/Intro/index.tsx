@@ -1,15 +1,16 @@
 import React, { useCallback, useEffect, useRef, FC } from 'react';
-import IntroWrapper from './styles';
+import IntroWrapper from './intro.styles';
 import SwitchLogo from '@/components/SwitchLogo';
-import { motion, useAnimation } from 'framer-motion';
+import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import { sleep } from '@/utils';
 import useSessionStorage from '@/hooks/useSessionStorage';
-import { ReactComponent as Logo } from '../../../public/switch-logo.svg';
+import { ReactComponent as Logo } from '../../../public/icons/switch-logo.svg';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const Intro: FC = () => {
-  const wrapperRef = useRef<HTMLElement>(null);
   const router = useRouter();
+  const wrapperRef = useRef<HTMLElement>(null);
   const [animationRan, setAnimationRan] = useSessionStorage<string>(
     'nswitch-animation-ran'
   );
@@ -24,6 +25,7 @@ const Intro: FC = () => {
   const logoRef = useRef<HTMLSpanElement>(null);
   const circleRef = useRef<HTMLSpanElement>(null);
 
+  // アニメーション設定
   const introSequence = useCallback(async () => {
     if (logoRef.current && !animationRan && router.pathname === '/') {
       window.history.scrollRestoration = 'manual';
@@ -75,8 +77,8 @@ const Intro: FC = () => {
       });
       logoControl.start({ marginRight: '8px' });
       textControl.start({ marginRight: '24px', marginTop: 0 });
-      sloganControl.start({ fontSize: '0.3em' });
-      setAnimationRan('true');
+      sloganControl.start({ fontSize: '0.3em', marginTop: 0 });
+      //setAnimationRan('true');
     } else if (logoRef.current) {
       logoRef.current.classList.add('no-animation');
       logoControl.set({
@@ -86,7 +88,12 @@ const Intro: FC = () => {
         marginRight: '8px'
       });
       circleControl.set({ scale: 7 });
-      sloganControl.set({ opacity: 1, fontSize: '0.3em', color: '#fff' });
+      sloganControl.set({
+        opacity: 1,
+        fontSize: '0.3em',
+        color: '#fff',
+        marginTop: 0
+      });
       textControl.set({
         width: '1.5em',
         marginRight: '24px',
@@ -109,11 +116,23 @@ const Intro: FC = () => {
 
   return (
     <IntroWrapper
-      layoutId="AppHeader"
       animate={wrapperControl}
-      layout={true}
       ref={wrapperRef}
+      style={{ width: '100%' }}
     >
+      <AnimatePresence>
+        {router.pathname !== '/' && (
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="top-link-wrap"
+            title="トップページへ"
+          >
+            <Link href="/">{`< トップページ`}</Link>
+          </motion.span>
+        )}
+      </AnimatePresence>
       <SwitchLogo
         layout={true}
         initial={{ opacity: 0, scale: 0.4 }}
@@ -148,19 +167,6 @@ const Intro: FC = () => {
         ref={circleRef}
         className="circle element"
       />
-      {/* <span className="divider">
-        <svg
-          data-name="Layer 1"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-            className="shape-fill"
-          ></path>
-        </svg>
-      </span> */}
     </IntroWrapper>
   );
 };

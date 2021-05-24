@@ -1,10 +1,10 @@
 import 'styled-components';
 
 export const breakpoints = {
-  mobile: '330px',
+  mobile: '340px',
   tablet: '768px',
-  desktop: '992px',
-  lgDesktop: '1100px'
+  desktop: '900px',
+  lgDesktop: '1200px'
 };
 
 export const grayscale = {

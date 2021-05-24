@@ -1,12 +1,28 @@
-import { AnimatePresence, motion, Variants } from 'framer-motion';
-import React, { FC, useCallback, useMemo, useRef, useState } from 'react';
-import { ReactComponent as PlayButton } from '../../public/nintendo-switch-play-button.svg';
-import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import React, { FC, useEffect, useMemo, useRef, useState } from 'react';
+import { ReactComponent as PlayButton } from '../../public/icons/nintendo-switch-play-button.svg';
+import styled, { keyframes } from 'styled-components';
+import useMobileDetect from '@/hooks/useMobileDetect';
 
 type SwitchVideoType = {
   videoId: string;
   title: string;
 };
+
+const float = keyframes`
+	${'0%'} {
+		transform: translatey(0px);
+    filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.4));
+	}
+	${'50%'} {
+		transform: translatey(-8px);
+    filter: drop-shadow(10px 10px 8px rgba(0,0,0,0.4));
+	}
+	${'100%'} {
+		transform: translatey(0px);
+    filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.4));
+	}
+`;
 
 const VideoWrap = styled.div`
   overflow: hidden;
@@ -17,6 +33,9 @@ const VideoWrap = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  &.animate {
+    animation: ${float} 5s ease-in-out infinite;
+  }
   iframe,
   .play-button {
     background-color: transparent;
@@ -71,6 +90,8 @@ const VideoWrap = styled.div`
 
 const SwitchVideo: FC<SwitchVideoType> = (props) => {
   const { videoId, title } = props;
+  const { isMobile } = useMobileDetect();
+  const [check, setCheck] = useState(false);
   const [loadVideo, setLoadVideo] = useState(false);
   const IframeRef = useRef<HTMLIFrameElement>(null);
   const placeholder = useMemo(
@@ -80,44 +101,45 @@ const SwitchVideo: FC<SwitchVideoType> = (props) => {
 
   const handleClik = async () => {
     setLoadVideo(true);
-    await IframeRef.current?.requestFullscreen();
   };
 
+  useEffect(() => {
+    setCheck(isMobile());
+  }, [isMobile()]);
+
   return (
-    <VideoWrap className="switch-video">
-      <AnimatePresence>
-        {!loadVideo ? (
-          <motion.button
-            className="play-button"
-            onClick={handleClik}
-            initial={{ opacity: 0 }}
-            exit={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          >
-            <PlayButton className="play-icon" />
-            <img
-              src={placeholder}
-              className="placeholder glove-cursor"
-              alt={`${title}のプレースホルダー`}
-            />
-          </motion.button>
-        ) : (
-          <motion.iframe
-            width="853"
-            height="480"
-            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0`}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen={true}
-            title={title}
-            loading="lazy"
-            className="glove-cursor"
-            ref={IframeRef}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { delay: 0.5 } }}
+    <VideoWrap className={`switch-video ${check ? '' : 'animate'}`}>
+      {!loadVideo && !check ? (
+        <motion.button
+          className="play-button"
+          onClick={handleClik}
+          initial={{ opacity: 0 }}
+          exit={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          <PlayButton className="play-icon" />
+          <img
+            src={placeholder}
+            className="placeholder glove-cursor"
+            alt={`${title}のプレースホルダー`}
           />
-        )}
-      </AnimatePresence>
+        </motion.button>
+      ) : (
+        <motion.iframe
+          width="853"
+          height="480"
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0`}
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen={true}
+          title={title}
+          loading="lazy"
+          className="glove-cursor"
+          ref={IframeRef}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { delay: 0.5 } }}
+        />
+      )}
     </VideoWrap>
   );
 };
