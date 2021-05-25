@@ -16,15 +16,14 @@ import { LinkButton } from '@/components/Button';
 const GameCard: FC<GameCardType> = (props) => {
   const { title, img, id, ...rest } = props;
   const { isMobile } = useMobileDetect();
-  const { inView, ref } = useInView({
-    threshold: 0.9,
-    triggerOnce: true
-  });
   const [cardD, setCardD] = useState<{ width: number; height: number }>({
     height: 0,
     width: 0
   });
   const cardRef = useRef<HTMLDivElement>(null);
+  const { inView, ref } = useInView({
+    threshold: 1
+  });
 
   // framer-motion
   const x = useMotionValue(0);
@@ -56,7 +55,7 @@ const GameCard: FC<GameCardType> = (props) => {
       bgImageControl.start({ scale: 1.2, x: 0, y: 0 });
       logoControl.start({ rotateX: 0, rotateY: 0 });
     }
-  }, [inView]);
+  }, []);
 
   function handleMouse(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -65,57 +64,63 @@ const GameCard: FC<GameCardType> = (props) => {
   }
 
   return (
-    <GameCardWrap
-      {...rest}
-      ref={cardRef}
-      className={`${id}-card`}
-      onMouseMove={(e) => {
-        if (!isMobile()) {
-          handleMouse(e);
-        }
-      }}
-      style={{
-        perspective: !isMobile() ? 1000 : 'initial'
-      }}
-      layout={true}
-      whileTap={
-        !isMobile()
-          ? { scale: 0.95, borderRadius: '16px' }
-          : { scale: 1, borderRadius: '16px' }
-      }
-      initial={false}
-      onMouseEnter={() => {
-        if (!isMobile()) {
-          bgImageControl.start({ scale: 1.8 });
-        }
-      }}
-      onMouseLeave={() => {
-        if (!isMobile()) {
-          logoControl.start({ rotateX: 0, rotateY: 0 });
-          bgImageControl.start({ scale: 1.2, x: 0, y: 0 });
-        }
+    <motion.li
+      ref={ref}
+      initial={{ scale: 1 }}
+      animate={{
+        scale: inView ? 1 : 0.85,
+        pointerEvents: inView ? 'auto' : 'none'
       }}
     >
-      <motion.span
-        className="logo-wrap"
-        ref={ref}
-        animate={logoControl}
-        initial={false}
+      <GameCardWrap
+        {...rest}
+        ref={cardRef}
+        className={`${id}-card`}
+        onMouseMove={(e) => {
+          if (!isMobile()) {
+            handleMouse(e);
+          }
+        }}
         style={{
-          rotateX: isMobile() ? 0 : rotateX,
-          rotateY: isMobile() ? 0 : rotateY
+          perspective: !isMobile() ? 1000 : 'initial'
+        }}
+        layout={true}
+        whileTap={
+          !isMobile()
+            ? { scale: 0.95, borderRadius: '16px' }
+            : { scale: 1, borderRadius: '16px' }
+        }
+        initial={false}
+        onMouseEnter={() => {
+          if (!isMobile()) {
+            bgImageControl.start({ scale: 1.8 });
+          }
+        }}
+        onMouseLeave={() => {
+          if (!isMobile()) {
+            logoControl.start({ rotateX: 0, rotateY: 0 });
+            bgImageControl.start({ scale: 1.2, x: 0, y: 0 });
+          }
         }}
       >
-        <motion.img className="logo" alt={`${title} ロゴ`} src={img.logo} />
-      </motion.span>
-      <motion.img
-        style={{ x: moveY2, y: moveX2, scale: 1.2 }}
-        className="bg"
-        alt={`${title}バックグラウンド`}
-        src={img.bg}
-        animate={bgImageControl}
-      />
-      {inView && (
+        <motion.span
+          className="logo-wrap"
+          animate={logoControl}
+          initial={false}
+          style={{
+            rotateX: isMobile() ? 0 : rotateX,
+            rotateY: isMobile() ? 0 : rotateY
+          }}
+        >
+          <motion.img className="logo" alt={`${title} ロゴ`} src={img.logo} />
+        </motion.span>
+        <motion.img
+          style={{ x: moveY2, y: moveX2, scale: 1.2 }}
+          className="bg"
+          alt={`${title}バックグラウンド`}
+          src={img.bg}
+          animate={bgImageControl}
+        />
         <Link passHref={true} href={`/games/${id}`}>
           <LinkButton
             initial={{ opacity: 0, height: 0 }}
@@ -126,13 +131,13 @@ const GameCard: FC<GameCardType> = (props) => {
             ゲームページへ
           </LinkButton>
         </Link>
-      )}
-      <Link passHref={true} href={`/games/${id}`}>
-        <a>
-          <span className="sr-only">{`${title}のペジへ`}</span>
-        </a>
-      </Link>
-    </GameCardWrap>
+        <Link passHref={true} href={`/games/${id}`}>
+          <a>
+            <span className="sr-only">{`${title}のペジへ`}</span>
+          </a>
+        </Link>
+      </GameCardWrap>
+    </motion.li>
   );
 };
 
