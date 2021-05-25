@@ -284,14 +284,14 @@ function GameInfoPage(props: GameInfoType) {
             <span className="sr-only">{title}</span>
           </motion.h1>
           <div className="middle-row">
-            <motion.div className="content" layout={true}>
-              <motion.div
-                className="middle-row-top"
-                initial="hiddenLeft"
-                animate="slideIn"
-                exit="hiddenLeft"
-                variants={gameInfoVariants}
-              >
+            <motion.div
+              className="content"
+              initial="hiddenLeft"
+              animate="slideIn"
+              exit="hiddenLeft"
+              variants={gameInfoVariants}
+            >
+              <div className="middle-row-top">
                 <h3>{releaseDate}</h3>
                 <LinkButton
                   className="official-link"
@@ -303,18 +303,12 @@ function GameInfoPage(props: GameInfoType) {
                 >
                   <span>オフィシャルサイトへ</span> <OpenNew />
                 </LinkButton>
-              </motion.div>
-              <motion.ul
-                className="overview-list"
-                initial="hiddenLeft"
-                animate="slideIn"
-                exit="hiddenLeft"
-                variants={gameInfoVariants}
-              >
+              </div>
+              <ul className="overview-list">
                 {overview.map((line, i) => (
                   <li key={i}>{line}</li>
                 ))}
-              </motion.ul>
+              </ul>
             </motion.div>
             <motion.img
               src={img.char}

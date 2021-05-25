@@ -70,18 +70,22 @@ const Intro: FC = () => {
           duration: 0.7
         }
       });
+      await sleep(1000);
+      logoControl.start({ opacity: 0 });
+      textControl.start({ opacity: 0 });
+      sloganControl.start({ opacity: 0 });
       await wrapperControl.start({
         height: '100px',
         fontSize: '60px',
         flexDirection: 'row',
         boxShadow: '0 0 8px black',
         transition: {
-          delay: 1
+          delay: 0.5
         }
       });
-      logoControl.start({ marginRight: '8px' });
-      textControl.start({ marginRight: '24px', marginTop: 0 });
-      sloganControl.start({ fontSize: '0.3em', marginTop: 0 });
+      logoControl.start({ marginRight: '8px', opacity: 1 });
+      textControl.start({ marginRight: '24px', marginTop: 0, opacity: 1 });
+      sloganControl.start({ fontSize: '0.3em', marginTop: 0, opacity: 1 });
       document.documentElement.removeAttribute('style');
       // これにより、アニメーションがセッションごとに1回だけ発生するようになります
       setAnimationRan('true');

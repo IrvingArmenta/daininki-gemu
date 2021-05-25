@@ -16,8 +16,8 @@ const GamesList: FC<{ gamesList: GameType[] }> = (props) => {
     useCallback((state) => state.scrollPreserve, [])
   );
   const [scrollRange, setScrollRange] = useState(0);
-  const oRef = useRef<HTMLUListElement>(null);
-  const { scrollXProgress } = useElementScroll(oRef);
+  const wrapRef = useRef<HTMLElement>(null);
+  const { scrollXProgress } = useElementScroll(wrapRef);
   const xRange = useTransform(scrollXProgress, [0, 1], [0, 100]);
   useEffect(
     () => xRange.onChange((v) => setScrollRange(Number(v.toFixed(0)))),
@@ -25,20 +25,23 @@ const GamesList: FC<{ gamesList: GameType[] }> = (props) => {
   );
 
   useEffect(() => {
-    if (oRef.current) {
-      oRef.current.scrollLeft = scrollData;
+    if (wrapRef.current && scrollData) {
+      wrapRef.current.scrollLeft = scrollData;
     }
-  }, []);
+  }, [scrollData]);
 
   return (
-    <GamesListWrap id="appGamesList">
-      <motion.ul className="list-wrap" ref={oRef} id="appMainList">
+    <GamesListWrap id="appGamesList" ref={wrapRef}>
+      <ul className="list-wrap">
         {gamesList.map((game) => (
-          <li key={game.id}>
-            <GameCard title={game.title} img={game.img} id={game.id} />
-          </li>
+          <GameCard
+            key={game.id}
+            title={game.title}
+            img={game.img}
+            id={game.id}
+          />
         ))}
-      </motion.ul>
+      </ul>
       <AnimatePresence>
         {scrollRange !== 100 && (
           <motion.span
