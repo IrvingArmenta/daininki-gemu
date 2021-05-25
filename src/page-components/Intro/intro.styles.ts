@@ -7,11 +7,12 @@ const IntroWrapper = styled(motion.header)`
   position: relative;
   flex-direction: column;
   font-size: 30vw;
+  background-color: #fff;
   ${mediaUp('desktop')} {
     font-size: 20vw;
   }
   overflow: hidden;
-  z-index: 1;
+  z-index: 4;
   .element {
     display: block;
   }

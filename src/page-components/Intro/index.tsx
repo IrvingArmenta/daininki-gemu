@@ -32,6 +32,7 @@ const Intro: FC = () => {
 
   // アニメーション設定
   const introSequence = useCallback(async () => {
+    console.log(animationRan);
     if (logoRef.current && !animationRan && router.pathname === '/') {
       window.history.scrollRestoration = 'manual';
       window.scrollTo({ top: 0 });
