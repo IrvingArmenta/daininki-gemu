@@ -37,7 +37,7 @@ const GamesListWrap = styled.section`
     }
     li {
       position: relative;
-      min-width: 350px;
+      min-width: 320px;
       border-radius: 16px;
       overflow: hidden;
       box-shadow: 0 4px 2px #333;
@@ -74,7 +74,7 @@ const GamesListWrap = styled.section`
     position: fixed;
     top: 0;
     bottom: 0;
-    width: 80px;
+    width: 60px;
     display: flex;
     align-items: center;
     pointer-events: none;
