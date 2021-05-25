@@ -17,40 +17,47 @@ import { mediaUp } from '@/styles/utils';
 import { ReactComponent as OpenNew } from '../../../public/icons/open-new-icon.svg';
 import Head from 'next/head';
 import { deployUrl } from '@/utils';
+import useMobileDetect from '@/hooks/useMobileDetect';
 
 const gameInfoVariants: Variants = {
   hidden: {
     opacity: 0
   },
   reveal: {
-    opacity: 1
+    opacity: 1,
+    transition: {
+      when: 'beforeChildren'
+    }
   },
-  scaleOut: {
-    scale: 0,
+  scaleOut: (mobile: boolean) => ({
+    scale: mobile ? 1 : 0,
     opacity: 0
-  },
-  scaleIn: {
+  }),
+  scaleIn: (mobile: boolean) => ({
     scale: 1,
     opacity: 1,
     transition: {
-      delay: 0.2
+      delay: mobile ? 0 : 0.2
     }
-  },
-  hiddenLeft: {
-    translateX: '-80%',
+  }),
+  hiddenLeft: (mobile: boolean) => ({
+    translateX: mobile ? 0 : '-100%',
+    translateY: mobile ? -16 : 0,
     opacity: 0
-  },
-  hiddenRight: {
-    translateX: '80%',
+  }),
+  hiddenRight: (mobile: boolean) => ({
+    translateX: mobile ? 0 : '100%',
+    translateY: mobile ? -16 : 0,
     opacity: 0
-  },
-  slideIn: {
+  }),
+  slideIn: (mobile: boolean) => ({
     translateX: 0,
+    translateY: 0,
     opacity: 1,
     transition: {
-      delay: 0.2
+      delay: mobile ? 0 : 0.2
     }
-  }
+  })
 };
 
 type GameInfoType = {
@@ -248,6 +255,7 @@ const GameInfoWrapper = styled(motion.section)<{ $bgImage: string }>`
 `;
 
 function GameInfoPage(props: GameInfoType) {
+  const { isMobile } = useMobileDetect();
   const { gameData, prevGame, nextGame } = props;
   const { title, id, img, youtubeId, releaseDate, overview, url } = gameData;
 
@@ -275,6 +283,8 @@ function GameInfoPage(props: GameInfoType) {
             initial="scaleOut"
             animate="scaleIn"
             exit="scaleOut"
+            custom={isMobile()}
+            suppressHydrationWarning={true}
           >
             <img
               src={img.logo}
@@ -289,7 +299,9 @@ function GameInfoPage(props: GameInfoType) {
               initial="hiddenLeft"
               animate="slideIn"
               exit="hiddenLeft"
+              custom={isMobile()}
               variants={gameInfoVariants}
+              suppressHydrationWarning={true}
             >
               <div className="middle-row-top">
                 <h3>{releaseDate}</h3>
@@ -317,7 +329,9 @@ function GameInfoPage(props: GameInfoType) {
               alt={`${title} キャラクター`}
               initial="hiddenRight"
               animate="slideIn"
+              custom={isMobile()}
               exit="hiddenRight"
+              suppressHydrationWarning={true}
             />
           </div>
           <motion.div
@@ -326,6 +340,8 @@ function GameInfoPage(props: GameInfoType) {
             animate="scaleIn"
             exit="scaleOut"
             variants={gameInfoVariants}
+            custom={isMobile()}
+            suppressHydrationWarning={true}
           >
             <SwitchVideo title={`${title} どうが`} videoId={youtubeId} />
           </motion.div>
@@ -335,9 +351,11 @@ function GameInfoPage(props: GameInfoType) {
                 initial="hiddenLeft"
                 animate="slideIn"
                 exit="hiddenLeft"
+                custom={isMobile()}
                 variants={gameInfoVariants}
                 whileTap={{ scale: 0.95 }}
                 className="nav-button prev"
+                suppressHydrationWarning={true}
               >
                 <img src={prevGame.img.logo} alt={`${prevGame.title} ロゴ`} />
               </LinkButton>
@@ -359,9 +377,11 @@ function GameInfoPage(props: GameInfoType) {
                 initial="hiddenRight"
                 animate="slideIn"
                 exit="hiddenRight"
+                custom={isMobile()}
                 variants={gameInfoVariants}
                 className="nav-button next"
                 whileTap={{ scale: 0.95 }}
+                suppressHydrationWarning={true}
               >
                 <img src={nextGame.img.logo} alt={`${nextGame.title} ロゴ`} />
               </LinkButton>
