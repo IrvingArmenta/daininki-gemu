@@ -74,7 +74,7 @@ const GamesListWrap = styled.section`
     position: fixed;
     top: 0;
     bottom: 0;
-    width: 80px;
+    width: 60px;
     display: flex;
     align-items: center;
     pointer-events: none;

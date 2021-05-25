@@ -24,7 +24,8 @@ const GameCard: FC<GameCardType> = (props) => {
   const { inView, ref } = useInView({
     threshold: 0.8,
     delay: 500,
-    skip: !isMobile()
+    skip: !isMobile(),
+    initialInView: !isMobile()
   });
 
   // framer-motion
