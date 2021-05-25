@@ -37,11 +37,11 @@ const gameInfoVariants: Variants = {
     }
   },
   hiddenLeft: {
-    translateX: '-80%',
+    translateX: '-100%',
     opacity: 0
   },
   hiddenRight: {
-    translateX: '80%',
+    translateX: '100%',
     opacity: 0
   },
   slideIn: {

@@ -9,9 +9,11 @@ import { GameType } from '../../api/data-typings';
 import GamesListWrap from './styles';
 import GameCard from './gameCard';
 import { useGlobalStore } from '@/store';
+import useSessionStorage from '@/hooks/useSessionStorage';
 
 const GamesList: FC<{ gamesList: GameType[] }> = (props) => {
   const { gamesList } = props;
+  const [animationRan] = useSessionStorage<string>('nswitch-animation-ran');
   const scrollData = useGlobalStore(
     useCallback((state) => state.scrollPreserve, [])
   );
@@ -43,7 +45,7 @@ const GamesList: FC<{ gamesList: GameType[] }> = (props) => {
         ))}
       </ul>
       <AnimatePresence>
-        {scrollRange !== 100 && (
+        {scrollRange !== 100 && animationRan && (
           <motion.span
             aria-label="右にスクロールできます"
             role="img"
@@ -55,7 +57,7 @@ const GamesList: FC<{ gamesList: GameType[] }> = (props) => {
         )}
       </AnimatePresence>
       <AnimatePresence>
-        {scrollRange !== 0 && (
+        {scrollRange !== 0 && animationRan && (
           <motion.span
             aria-label="左にスクロールできます"
             role="img"
