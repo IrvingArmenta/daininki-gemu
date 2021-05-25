@@ -9,11 +9,9 @@ import { GameType } from '../../api/data-typings';
 import GamesListWrap from './styles';
 import GameCard from './gameCard';
 import { useGlobalStore } from '@/store';
-import useSessionStorage from '@/hooks/useSessionStorage';
 
 const GamesList: FC<{ gamesList: GameType[] }> = (props) => {
   const { gamesList } = props;
-  const [animationRan] = useSessionStorage<string>('nswitch-animation-ran');
   const scrollData = useGlobalStore(
     useCallback((state) => state.scrollPreserve, [])
   );
