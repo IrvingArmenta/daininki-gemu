@@ -31,7 +31,7 @@ const GamesList: FC<{ gamesList: GameType[] }> = (props) => {
   }, [scrollData]);
 
   return (
-    <GamesListWrap id="appGamesList" ref={wrapRef}>
+    <GamesListWrap id="appMainList" ref={wrapRef}>
       <ul className="list-wrap">
         {gamesList.map((game) => (
           <GameCard
