@@ -45,7 +45,7 @@ const GamesList: FC<{ gamesList: GameType[] }> = (props) => {
       <AnimatePresence>
         {scrollRange !== 100 && (
           <motion.span
-            aria-label="右にスクロールできます"
+            title="右にスクロールできます"
             role="img"
             className="right-indicator"
             initial={{ opacity: 0 }}
@@ -57,7 +57,7 @@ const GamesList: FC<{ gamesList: GameType[] }> = (props) => {
       <AnimatePresence>
         {scrollRange !== 0 && (
           <motion.span
-            aria-label="左にスクロールできます"
+            title="左にスクロールできます"
             role="img"
             className="left-indicator"
             initial={{ opacity: 0 }}
