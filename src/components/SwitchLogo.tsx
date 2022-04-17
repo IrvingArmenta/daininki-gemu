@@ -77,7 +77,7 @@ const SwitchLogo = forwardRef<
   HTMLMotionProps<'span'> & { size?: number }
 >(function SwitchLogo(props, ref) {
   return (
-    <SwitchLogoWrap {...props} ref={ref} role="img">
+    <SwitchLogoWrap title="大人気ゲームロゴ" {...props} ref={ref} role="img">
       <span />
     </SwitchLogoWrap>
   );

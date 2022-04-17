@@ -91,11 +91,11 @@ const VideoWrap = styled.div`
 const SwitchVideo: FC<SwitchVideoType> = (props) => {
   const { videoId, title } = props;
   const { isMobile } = useMobileDetect();
-  const [check, setCheck] = useState(false);
+  const [checkMobile, setCheckMobile] = useState(false);
   const [loadVideo, setLoadVideo] = useState(false);
   const IframeRef = useRef<HTMLIFrameElement>(null);
   const placeholder = useMemo(
-    () => `http://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+    () => `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
     [videoId]
   );
 
@@ -104,18 +104,19 @@ const SwitchVideo: FC<SwitchVideoType> = (props) => {
   };
 
   useEffect(() => {
-    setCheck(isMobile());
+    setCheckMobile(isMobile());
   }, [isMobile()]);
 
   return (
-    <VideoWrap className={`switch-video ${check ? '' : 'animate'}`}>
-      {!loadVideo && !check ? (
+    <VideoWrap className={`switch-video ${checkMobile ? '' : 'animate'}`}>
+      {!loadVideo && !checkMobile ? (
         <motion.button
           className="play-button"
           onClick={handleClik}
           initial={{ opacity: 0 }}
           exit={{ opacity: 0 }}
           animate={{ opacity: 1 }}
+          type="button"
         >
           <PlayButton className="play-icon" />
           <img
