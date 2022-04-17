@@ -2,12 +2,7 @@ import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import gamesData from 'api/switch-games.json';
 import { GameType } from '@/api/data-typings';
-import {
-  AnimatePresence,
-  AnimateSharedLayout,
-  motion,
-  Variants
-} from 'framer-motion';
+import { AnimatePresence, motion, Variants } from 'framer-motion';
 import styled from 'styled-components';
 import SwitchVideo from '@/components/SwitchVideo';
 import { PageHeight } from '@/page-components/shared';
@@ -260,136 +255,130 @@ function GameInfoPage(props: GameInfoType) {
   const { title, id, img, youtubeId, releaseDate, overview, url } = gameData;
 
   return (
-    <AnimateSharedLayout>
-      <AnimatePresence exitBeforeEnter={true}>
-        <GameInfoWrapper
-          key={id}
+    <AnimatePresence exitBeforeEnter={true}>
+      <GameInfoWrapper
+        key={id}
+        variants={gameInfoVariants}
+        $bgImage={`url(${img.bg})`}
+        initial="hidden"
+        animate="reveal"
+        exit="hidden"
+      >
+        <Head>
+          <title>{`Nintendo Switch - ${title}ページ`}</title>
+          <meta
+            name="description"
+            content={`Nintendo Switch大人気ゲーム - ${title}`}
+          />
+          <link rel="canonical" href={`${deployUrl}${id}`} />
+        </Head>
+        <motion.h1
           variants={gameInfoVariants}
-          $bgImage={`url(${img.bg})`}
-          initial="hidden"
-          animate="reveal"
-          exit="hidden"
+          initial="scaleOut"
+          animate="scaleIn"
+          exit="scaleOut"
+          custom={isMobile()}
+          suppressHydrationWarning={true}
         >
-          <Head>
-            <title>{`Nintendo Switch - ${title}ページ`}</title>
-            <meta
-              name="description"
-              content={`Nintendo Switch大人気ゲーム - ${title}`}
-            />
-            <link rel="canonical" href={`${deployUrl}${id}`} />
-          </Head>
-          <motion.h1
-            variants={gameInfoVariants}
-            initial="scaleOut"
-            animate="scaleIn"
-            exit="scaleOut"
+          <img src={img.logo} className={`logo ${id}`} alt={`${title} ロゴ`} />
+          <span className="sr-only">{title}</span>
+        </motion.h1>
+        <div className="middle-row">
+          <motion.div
+            className="content"
+            initial="hiddenLeft"
+            animate="slideIn"
+            exit="hiddenLeft"
             custom={isMobile()}
+            variants={gameInfoVariants}
             suppressHydrationWarning={true}
           >
-            <img
-              src={img.logo}
-              className={`logo ${id}`}
-              alt={`${title} ロゴ`}
-            />
-            <span className="sr-only">{title}</span>
-          </motion.h1>
-          <div className="middle-row">
-            <motion.div
-              className="content"
+            <div className="middle-row-top">
+              <h3>{releaseDate}</h3>
+              <LinkButton
+                className="official-link"
+                target="__blank"
+                href={url}
+                rel="noopener noreferrer"
+                $fontSize="14px"
+                whileTap={{ scale: 0.96 }}
+              >
+                <span>オフィシャルサイトへ</span> <OpenNew />
+              </LinkButton>
+            </div>
+            <ul className="overview-list">
+              {overview.map((line, i) => (
+                <li key={i}>{line}</li>
+              ))}
+            </ul>
+          </motion.div>
+          <motion.img
+            src={img.char}
+            className="char"
+            variants={gameInfoVariants}
+            alt={`${title} キャラクター`}
+            initial="hiddenRight"
+            animate="slideIn"
+            custom={isMobile()}
+            exit="hiddenRight"
+            suppressHydrationWarning={true}
+          />
+        </div>
+        <motion.div
+          className="switch-video-wrap"
+          initial="scaleOut"
+          animate="scaleIn"
+          exit="scaleOut"
+          variants={gameInfoVariants}
+          custom={isMobile()}
+          suppressHydrationWarning={true}
+        >
+          <SwitchVideo title={`${title} どうが`} videoId={youtubeId} />
+        </motion.div>
+        <nav className="nav-wrap">
+          <Link passHref={true} href={`/games/${prevGame.id}`}>
+            <LinkButton
               initial="hiddenLeft"
               animate="slideIn"
               exit="hiddenLeft"
               custom={isMobile()}
               variants={gameInfoVariants}
+              whileTap={{ scale: 0.95 }}
+              className="nav-button prev"
               suppressHydrationWarning={true}
             >
-              <div className="middle-row-top">
-                <h3>{releaseDate}</h3>
-                <LinkButton
-                  className="official-link"
-                  target="__blank"
-                  href={url}
-                  rel="noopener noreferrer"
-                  $fontSize="14px"
-                  whileTap={{ scale: 0.96 }}
-                >
-                  <span>オフィシャルサイトへ</span> <OpenNew />
-                </LinkButton>
-              </div>
-              <ul className="overview-list">
-                {overview.map((line, i) => (
-                  <li key={i}>{line}</li>
-                ))}
-              </ul>
-            </motion.div>
-            <motion.img
-              src={img.char}
-              className="char"
+              <img src={prevGame.img.logo} alt={`${prevGame.title} ロゴ`} />
+            </LinkButton>
+          </Link>
+          <Link passHref={true} href="/">
+            <LinkButton
+              initial="hidden"
+              animate="reveal"
+              exit="hidden"
               variants={gameInfoVariants}
-              alt={`${title} キャラクター`}
+              className="top-page-button"
+              whileTap={{ scale: 0.95 }}
+            >
+              トップページへ
+            </LinkButton>
+          </Link>
+          <Link passHref={true} href={`/games/${nextGame.id}`}>
+            <LinkButton
               initial="hiddenRight"
               animate="slideIn"
-              custom={isMobile()}
               exit="hiddenRight"
+              custom={isMobile()}
+              variants={gameInfoVariants}
+              className="nav-button next"
+              whileTap={{ scale: 0.95 }}
               suppressHydrationWarning={true}
-            />
-          </div>
-          <motion.div
-            className="switch-video-wrap"
-            initial="scaleOut"
-            animate="scaleIn"
-            exit="scaleOut"
-            variants={gameInfoVariants}
-            custom={isMobile()}
-            suppressHydrationWarning={true}
-          >
-            <SwitchVideo title={`${title} どうが`} videoId={youtubeId} />
-          </motion.div>
-          <nav className="nav-wrap">
-            <Link passHref={true} href={`/games/${prevGame.id}`}>
-              <LinkButton
-                initial="hiddenLeft"
-                animate="slideIn"
-                exit="hiddenLeft"
-                custom={isMobile()}
-                variants={gameInfoVariants}
-                whileTap={{ scale: 0.95 }}
-                className="nav-button prev"
-                suppressHydrationWarning={true}
-              >
-                <img src={prevGame.img.logo} alt={`${prevGame.title} ロゴ`} />
-              </LinkButton>
-            </Link>
-            <Link passHref={true} href="/">
-              <LinkButton
-                initial="hidden"
-                animate="reveal"
-                exit="hidden"
-                variants={gameInfoVariants}
-                className="top-page-button"
-                whileTap={{ scale: 0.95 }}
-              >
-                トップページへ
-              </LinkButton>
-            </Link>
-            <Link passHref={true} href={`/games/${nextGame.id}`}>
-              <LinkButton
-                initial="hiddenRight"
-                animate="slideIn"
-                exit="hiddenRight"
-                custom={isMobile()}
-                variants={gameInfoVariants}
-                className="nav-button next"
-                whileTap={{ scale: 0.95 }}
-                suppressHydrationWarning={true}
-              >
-                <img src={nextGame.img.logo} alt={`${nextGame.title} ロゴ`} />
-              </LinkButton>
-            </Link>
-          </nav>
-        </GameInfoWrapper>
-      </AnimatePresence>
-    </AnimateSharedLayout>
+            >
+              <img src={nextGame.img.logo} alt={`${nextGame.title} ロゴ`} />
+            </LinkButton>
+          </Link>
+        </nav>
+      </GameInfoWrapper>
+    </AnimatePresence>
   );
 }
 

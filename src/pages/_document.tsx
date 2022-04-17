@@ -22,14 +22,17 @@ class MyDocument extends Document {
 
       const initialProps = await Document.getInitialProps(ctx);
 
+      // FIX - find actual typing
+      const typedStyles = (
+        <>
+          {initialProps.styles}
+          {sheet.getStyleElement()}
+        </>
+      ) as unknown as React.ReactElement[];
+
       return {
         ...initialProps,
-        styles: (
-          <>
-            {initialProps.styles}
-            {sheet.getStyleElement()}
-          </>
-        )
+        styles: typedStyles
       };
     } finally {
       sheet.seal();
