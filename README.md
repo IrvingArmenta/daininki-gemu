@@ -7,7 +7,7 @@
 - パッケージマネージャー:
   - yarn - https://classic.yarnpkg.com/lang/en/
 - フレームワーク:
-  - Next JS - https://preactjs.com/
+  - Next JS - https://nextjs.org/
   - React - https://ja.reactjs.org/
   - Typescript - https://www.typescriptlang.org/ja/
 - スタイル:
